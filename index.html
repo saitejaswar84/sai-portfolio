@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Sai Tejaswar Reddy Dalli — AI/ML Engineer specializing in generative AI, RAG, fraud detection, and MLOps across financial services and enterprise domains."
+    />
+    <meta name="author" content="Sai Tejaswar Reddy Dalli" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Sai Tejaswar Reddy Dalli — AI/ML Engineer" />
+    <meta
+      property="og:description"
+      content="AI/ML Engineer with ~5 years building generative AI, RAG, and fraud-detection systems. Ask my AI anything about my work."
+    />
+    <meta property="og:type" content="website" />
+
+    <title>Sai Tejaswar Reddy Dalli — AI/ML Engineer</title>
+
+    <!-- Apply saved theme before paint to avoid a flash -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('theme');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          }
+          document.documentElement.classList.add(t);
+          document.documentElement.style.colorScheme = t;
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
