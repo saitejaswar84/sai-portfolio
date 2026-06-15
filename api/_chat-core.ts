@@ -3,7 +3,7 @@
 //
 // Uses Moonshot AI's Kimi K2.6 through NVIDIA's OpenAI-compatible NIM endpoint.
 // The system prompt that grounds the assistant lives in ./_resume-context.ts.
-import { SYSTEM_PROMPT } from './_resume-context';
+import { SYSTEM_PROMPT } from './_resume-context.js';
 
 export interface ChatMessage {
   role: 'user' | 'assistant';

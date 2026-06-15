@@ -1,7 +1,7 @@
 // Vercel serverless function: POST /api/chat
 // Streams a Kimi K2.6 (via NVIDIA) response grounded in Sai's resume.
 // Requires the NVIDIA_API_KEY environment variable (set in Vercel project settings).
-import { streamChat, type ChatMessage } from './_chat-core';
+import { streamChat, type ChatMessage } from './_chat-core.js';
 
 export default async function handler(req: any, res: any): Promise<void> {
   if (req.method !== 'POST') {
