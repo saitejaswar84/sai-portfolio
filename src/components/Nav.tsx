@@ -26,7 +26,7 @@ export default function Nav() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'border-b border-line bg-ink/80 backdrop-blur-xl' : 'border-b border-transparent'
+        scrolled ? 'glass-nav' : 'border-b border-transparent'
       }`}
     >
       <Container className="flex h-16 items-center justify-between">
@@ -80,7 +80,7 @@ export default function Nav() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-line bg-ink/95 backdrop-blur-xl md:hidden"
+            className="glass-nav overflow-hidden border-t border-line md:hidden"
           >
             <Container className="flex flex-col gap-1 py-4">
               {links.map((l) => (

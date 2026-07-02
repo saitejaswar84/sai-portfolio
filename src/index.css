@@ -39,12 +39,17 @@
   --c-on-accent: #ffffff;
   --c-glass: rgba(255, 255, 255, 0.5);
 
-  --glass-fill: rgba(255, 255, 255, 0.55);
+  --glass-fill: rgba(255, 255, 255, 0.5);
   --glass-fill-strong: rgba(255, 255, 255, 0.72);
-  --glass-edge: rgba(15, 23, 30, 0.08);
+  --glass-edge: rgba(15, 23, 30, 0.09);
   --glass-border: rgba(15, 23, 30, 0.14);
-  --glass-highlight: rgba(255, 255, 255, 0.85);
-  --glass-shadow: 0 12px 34px -14px rgba(15, 23, 30, 0.22);
+  --glass-highlight: rgba(255, 255, 255, 0.95);
+  --glass-highlight-soft: rgba(255, 255, 255, 0.55);
+  --glass-shade: rgba(15, 23, 30, 0.06);
+  --glass-shade-soft: rgba(15, 23, 30, 0.03);
+  --glass-tint-top: rgba(255, 255, 255, 0.6);
+  --glass-sheen: rgba(255, 255, 255, 0.45);
+  --glass-shadow: 0 16px 40px -18px rgba(15, 23, 30, 0.28);
 
   --blob-1: rgba(16, 185, 129, 0.34);
   --blob-2: rgba(56, 189, 248, 0.26);
@@ -71,9 +76,14 @@
 
   --glass-fill: rgba(255, 255, 255, 0.05);
   --glass-fill-strong: rgba(255, 255, 255, 0.09);
-  --glass-edge: rgba(255, 255, 255, 0.1);
+  --glass-edge: rgba(255, 255, 255, 0.12);
   --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-highlight: rgba(255, 255, 255, 0.14);
+  --glass-highlight: rgba(255, 255, 255, 0.18);
+  --glass-highlight-soft: rgba(255, 255, 255, 0.07);
+  --glass-shade: rgba(0, 0, 0, 0.4);
+  --glass-shade-soft: rgba(0, 0, 0, 0.22);
+  --glass-tint-top: rgba(255, 255, 255, 0.07);
+  --glass-sheen: rgba(255, 255, 255, 0.1);
   --glass-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.7);
 
   --blob-1: rgba(61, 220, 151, 0.16);
@@ -204,23 +214,57 @@
   }
 
   /* ---------- Glass surfaces ---------- */
+  /* Layered "liquid glass": tinted fill + top-light gradient, deep blur with
+     saturation so the backdrop blobs refract through, and a lit rim (bright
+     top edge, shaded bottom edge) that reads as physical thickness. */
   .glass {
+    background-image: linear-gradient(155deg, var(--glass-tint-top), transparent 42%);
     background-color: var(--glass-fill);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(185%);
+    backdrop-filter: blur(22px) saturate(185%);
     border: 1px solid var(--glass-edge);
-    box-shadow: var(--glass-shadow), inset 0 1px 0 0 var(--glass-highlight);
+    box-shadow:
+      var(--glass-shadow),
+      inset 0 1px 0 0 var(--glass-highlight),
+      inset 1px 0 0 0 var(--glass-highlight-soft),
+      inset 0 -1px 0 0 var(--glass-shade),
+      inset -1px 0 0 0 var(--glass-shade-soft);
   }
   .glass-strong {
     background-color: var(--glass-fill-strong);
   }
 
   .glass-hover {
+    position: relative;
     transition:
       transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
       background-color 0.3s ease,
       border-color 0.3s ease,
       box-shadow 0.3s ease;
+  }
+  /* Specular sheen that sweeps across the pane on hover */
+  .glass-hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      115deg,
+      transparent 25%,
+      var(--glass-sheen) 48%,
+      transparent 62%
+    );
+    background-size: 250% 100%;
+    background-position: 120% 0;
+    opacity: 0;
+    transition:
+      opacity 0.45s ease,
+      background-position 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .glass-hover:hover::after {
+    opacity: 1;
+    background-position: 0% 0;
   }
   .glass-hover:hover {
     transform: translateY(-4px);
@@ -229,7 +273,17 @@
     box-shadow:
       var(--glass-shadow),
       inset 0 1px 0 0 var(--glass-highlight),
-      0 0 24px -8px color-mix(in oklab, var(--color-accent) 45%, transparent);
+      inset 0 -1px 0 0 var(--glass-shade),
+      0 0 28px -8px color-mix(in oklab, var(--color-accent) 45%, transparent);
+  }
+
+  /* Frosted nav bar */
+  .glass-nav {
+    background-color: color-mix(in srgb, var(--c-ink) 55%, transparent);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid var(--glass-edge);
+    box-shadow: 0 12px 32px -24px rgba(0, 0, 0, 0.5);
   }
 
   @media (prefers-reduced-motion: reduce) {
