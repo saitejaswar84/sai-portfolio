@@ -242,29 +242,24 @@
       border-color 0.3s ease,
       box-shadow 0.3s ease;
   }
-  /* Specular sheen that sweeps across the pane on hover */
+  /* Liquid specular: a soft light spot that follows the pointer across the
+     pane (updated via --mx/--my from a global pointermove listener). */
   .glass-hover::after {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
     pointer-events: none;
-    background: linear-gradient(
-      115deg,
-      transparent 25%,
-      var(--glass-sheen) 48%,
-      transparent 62%
+    background: radial-gradient(
+      280px circle at var(--mx, 50%) var(--my, 35%),
+      var(--glass-sheen),
+      transparent 65%
     );
-    background-size: 250% 100%;
-    background-position: 120% 0;
     opacity: 0;
-    transition:
-      opacity 0.45s ease,
-      background-position 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 0.35s ease;
   }
   .glass-hover:hover::after {
     opacity: 1;
-    background-position: 0% 0;
   }
   .glass-hover:hover {
     transform: translateY(-4px);
@@ -275,6 +270,27 @@
       inset 0 1px 0 0 var(--glass-highlight),
       inset 0 -1px 0 0 var(--glass-shade),
       0 0 28px -8px color-mix(in oklab, var(--color-accent) 45%, transparent);
+  }
+
+  /* Refraction lensing (Chromium): displace the blurred backdrop through an
+     SVG turbulence map so the pane warps the background like real glass.
+     Gated behind html.lens, set at runtime only where supported. */
+  .lens .glass {
+    -webkit-backdrop-filter: blur(22px) saturate(185%) url(#liquid-lens);
+    backdrop-filter: blur(22px) saturate(185%) url(#liquid-lens);
+  }
+
+  /* Jelly interaction: springy overshoot on hover, liquid compress on press */
+  .liquid-press {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
+  }
+  .liquid-press:hover {
+    transform: scale(1.05);
+  }
+  .liquid-press:active {
+    transform: scale(0.94);
+    transition-duration: 0.12s;
   }
 
   /* Frosted nav bar */

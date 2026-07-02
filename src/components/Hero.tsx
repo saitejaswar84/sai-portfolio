@@ -81,7 +81,7 @@ export default function Hero() {
           >
             <button
               onClick={() => window.dispatchEvent(new Event('open-chat'))}
-              className="group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-on-accent transition-transform hover:scale-[1.03]"
+              className="liquid-press group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-on-accent"
             >
               <Sparkles size={16} />
               Ask my AI anything

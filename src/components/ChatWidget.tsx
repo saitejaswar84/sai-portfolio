@@ -111,7 +111,7 @@ export default function ChatWidget() {
             exit={{ scale: 0, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 260, damping: 20 }}
             onClick={() => setOpen(true)}
-            className="group fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-on-accent shadow-lg shadow-accent/20 transition-transform hover:scale-105 sm:bottom-6 sm:right-6"
+            className="liquid-press group fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-on-accent shadow-lg shadow-accent/20 sm:bottom-6 sm:right-6"
             aria-label="Open AI chat"
           >
             <Sparkles size={18} />
@@ -133,10 +133,10 @@ export default function ChatWidget() {
               className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm sm:hidden"
             />
             <motion.div
-              initial={{ opacity: 0, y: 30, scale: 0.98 }}
+              initial={{ opacity: 0, y: 36, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 30, scale: 0.98 }}
-              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, y: 36, scale: 0.94 }}
+              transition={{ type: 'spring', stiffness: 360, damping: 26, mass: 0.9 }}
               className="fixed inset-x-3 bottom-3 top-16 z-50 flex flex-col overflow-hidden rounded-2xl border border-line-strong bg-surface/85 shadow-2xl backdrop-blur-2xl sm:inset-auto sm:bottom-6 sm:right-6 sm:top-auto sm:h-[600px] sm:max-h-[80vh] sm:w-[400px]"
             >
               {/* header */}
