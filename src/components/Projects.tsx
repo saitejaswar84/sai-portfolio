@@ -12,13 +12,20 @@ export default function Projects() {
           {projects.map((p, i) => (
             <Reveal key={p.name} delay={i * 0.08}>
               <article className="glass glass-hover flex h-full flex-col rounded-2xl p-7">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="font-display text-xl font-semibold text-fg">{p.name}</h3>
+                <div className="flex items-center justify-between gap-4">
+                  <span
+                    className={`font-mono text-[11px] uppercase tracking-widest ${
+                      p.org === 'Personal project' ? 'text-faint' : 'text-accent'
+                    }`}
+                  >
+                    {p.org}
+                  </span>
                   <ArrowUpRight
                     size={20}
                     className="shrink-0 text-faint transition-colors group-hover:text-accent"
                   />
                 </div>
+                <h3 className="mt-2 font-display text-xl font-semibold text-fg">{p.name}</h3>
                 <p className="mt-2 text-sm text-accent/90">{p.blurb}</p>
 
                 <ul className="mt-5 flex-1 space-y-3">

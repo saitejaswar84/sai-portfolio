@@ -86,6 +86,7 @@ export const experience: Experience[] = [
 
 export interface Project {
   name: string;
+  org: string; // company for work systems, 'Personal project' otherwise
   blurb: string;
   highlights: string[];
   stack: string[];
@@ -93,7 +94,52 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    name: 'Enterprise RAG Knowledge Platform',
+    org: 'American Express',
+    blurb: 'Real-time retrieval across 15M+ customer interaction records.',
+    highlights: [
+      'Built enterprise-grade RAG with GPT-4 and LangChain over Pinecone and ChromaDB vector stores.',
+      'Enabled real-time semantic retrieval across 15M+ customer interaction records.',
+      'Cut analyst research time by 45% while meeting enterprise governance requirements.',
+    ],
+    stack: ['GPT-4', 'LangChain', 'RAG', 'Pinecone', 'ChromaDB'],
+  },
+  {
+    name: 'Multi-Agent Support Automation',
+    org: 'American Express',
+    blurb: 'Orchestrated AI agents that automate fraud-risk and support workflows.',
+    highlights: [
+      'Spearheaded multi-agent systems with LangChain orchestration and RAG pipelines, lifting operational efficiency 30% and cutting response turnaround 50%.',
+      'Engineered fine-tuned transformer models with TensorFlow and LlamaIndex for fraud-risk classification and support automation.',
+      'Improved prediction accuracy by 28% and reduced manual case handling by 35%.',
+    ],
+    stack: ['Multi-Agent', 'LangChain', 'LlamaIndex', 'TensorFlow', 'Fine-tuning'],
+  },
+  {
+    name: 'Real-Time Fraud Detection at Scale',
+    org: 'Infosys',
+    blurb: '20M+ transactions scored daily on GCP.',
+    highlights: [
+      'Designed fraud-detection pipelines with BigQuery ML, GCP Dataflow, and PostgreSQL processing 20M+ transactional records per day.',
+      'Improved fraud identification accuracy by 32% and reduced false positives by 25%.',
+      'Productionized with TFX, Vertex AI, Docker, and GKE, cutting release cycles by 40%.',
+    ],
+    stack: ['BigQuery ML', 'GCP Dataflow', 'Vertex AI', 'TFX', 'GKE'],
+  },
+  {
+    name: 'Explainable Credit Risk & Underwriting',
+    org: 'American Express',
+    blurb: 'Audit-ready ML for a regulated domain.',
+    highlights: [
+      'Implemented explainable AI with SHAP and LIME on XGBoost credit-risk and underwriting models.',
+      'Improved model transparency and interpretability for regulatory audits.',
+      'Backed by MLOps infrastructure (MLflow, GitHub Actions CI/CD) that accelerated deployment cycles by 40%.',
+    ],
+    stack: ['XGBoost', 'SHAP', 'LIME', 'MLflow', 'CI/CD'],
+  },
+  {
     name: 'LLM Fine-Tuning & Evaluation Pipeline',
+    org: 'Personal project',
     blurb: 'A domain-specific LLM training and evaluation workflow, documented end to end.',
     highlights: [
       'Fine-tuned a pre-trained LLaMA model for domain-specific text generation using custom training pipelines.',
@@ -104,6 +150,7 @@ export const projects: Project[] = [
   },
   {
     name: 'Ficopilot — AI Financial Agent',
+    org: 'Personal project',
     blurb: 'Natural-language financial analysis over your own spreadsheets.',
     highlights: [
       'Built an AI-powered financial analysis app in Streamlit enabling natural-language queries over uploaded Excel data.',
