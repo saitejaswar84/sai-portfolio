@@ -17,8 +17,7 @@ export const profile = {
   relocation: 'Open to relocation',
   email: 'tejaswar8484@gmail.com',
   phone: '+1 (562) 569-3720',
-  // Update this with your real LinkedIn URL
-  linkedin: 'https://www.linkedin.com/',
+  linkedin: 'https://www.linkedin.com/in/tejaswar-reddy',
   github: '',
 };
 

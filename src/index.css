@@ -3,6 +3,13 @@
 /* Class-based dark mode (toggled on <html>) */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Registered so the iridescent rim angle can animate smoothly */
+@property --iri {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 @theme {
   /* Semantic tokens resolve to runtime CSS vars so they swap per theme */
   --color-ink: var(--c-ink);
@@ -62,6 +69,9 @@
   --drop-3: #f4d9a0;
   --drop-hi-3: #fff3d6;
 
+  /* Iridescent rim intensity */
+  --iri-a: 0.65;
+
   color-scheme: light;
 }
 
@@ -102,6 +112,9 @@
   --drop-hi-2: #3aa9dd;
   --drop-3: #47239e;
   --drop-hi-3: #7c4dd8;
+
+  /* Iridescent rim intensity */
+  --iri-a: 0.5;
 
   color-scheme: dark;
 }
@@ -280,6 +293,46 @@
       border-color 0.3s ease,
       box-shadow 0.3s ease;
   }
+  /* Iridescent soap-bubble rim: thin ring of shifting spectral color that
+     rotates around the pane edge while hovered. */
+  .glass-hover::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1.5px;
+    pointer-events: none;
+    background: conic-gradient(
+      from var(--iri),
+      transparent 0% 8%,
+      rgba(255, 128, 210, var(--iri-a)) 16%,
+      rgba(90, 209, 255, var(--iri-a)) 28%,
+      transparent 38% 55%,
+      rgba(61, 220, 151, var(--iri-a)) 66%,
+      rgba(255, 214, 120, var(--iri-a)) 76%,
+      transparent 86% 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    animation: iridesce 5s linear infinite;
+  }
+  .glass-hover:hover::before {
+    opacity: 1;
+  }
+  @keyframes iridesce {
+    to {
+      --iri: 360deg;
+    }
+  }
+
   /* Liquid specular: a soft light spot that follows the pointer across the
      pane (updated via --mx/--my from a global pointermove listener). */
   .glass-hover::after {
