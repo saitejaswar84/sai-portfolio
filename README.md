@@ -1,6 +1,6 @@
 # Sai Tejaswar Reddy Dalli — Portfolio
 
-A modern, single-page portfolio for an AI/ML Engineer, featuring an **AI chat assistant** (powered by Moonshot AI's **Kimi K2.6** via NVIDIA) that answers visitors' questions about Sai's experience, projects, and skills — grounded in his resume.
+A modern, single-page portfolio for an AI/ML Engineer, featuring an **AI chat assistant** (powered by **GLM 5.2** via NVIDIA) that answers visitors' questions about Sai's experience, projects, and skills — grounded in his resume.
 
 Built with **React 19 + Vite + Tailwind CSS v4 + Framer Motion**. The chat runs on a serverless function so your API key never reaches the browser.
 
@@ -20,7 +20,7 @@ npm run dev          # http://localhost:5173 — chat works locally via a dev mi
 
 Don't have a key yet? The site still runs perfectly — the chat will just show a friendly
 "set NVIDIA_API_KEY" message until you add one. Get a key at
-<https://build.nvidia.com> (open the Kimi K2.6 model → "Get API Key").
+<https://build.nvidia.com> (open the GLM 5.2 model → "Get API Key").
 
 ```bash
 npm run build        # type-check + production build to /dist
@@ -42,7 +42,7 @@ The project is preconfigured for Vercel — the static site is served from `/dis
 2. Import it at <https://vercel.com/new> (framework auto-detects as **Vite**).
 3. In **Project → Settings → Environment Variables**, add:
    - `NVIDIA_API_KEY` = your key
-   - *(optional)* `CHAT_MODEL` = `moonshotai/kimi-k2.6` (default)
+   - *(optional)* `CHAT_MODEL` = `z-ai/glm-5.2` (default)
 4. Deploy. Done.
 
 Other hosts (Netlify, Cloudflare) work too — you'd port `api/chat.ts` to their function
@@ -73,11 +73,11 @@ If you change the resume facts in `src/data/resume.ts`, mirror them in
 ## How the AI chat works
 
 - The browser POSTs the conversation to `/api/chat`.
-- The serverless function (`api/chat.ts`) calls **Kimi K2.6** through NVIDIA's
+- The serverless function (`api/chat.ts`) calls **GLM 5.2** through NVIDIA's
   OpenAI-compatible endpoint with a system prompt built from `api/_resume-context.ts`,
   and **streams** the reply back token-by-token.
 - Your `NVIDIA_API_KEY` stays server-side. History is capped per request to bound cost.
-- Default model is `moonshotai/kimi-k2.6`; override with the `CHAT_MODEL` env var.
+- Default model is `z-ai/glm-5.2`; override with the `CHAT_MODEL` env var.
 
 ## Project structure
 

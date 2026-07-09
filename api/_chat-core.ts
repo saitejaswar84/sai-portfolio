@@ -1,7 +1,7 @@
 // Runtime-agnostic chat handler shared by the Vercel serverless function
 // (api/chat.ts) and the local Vite dev middleware (vite.config.ts).
 //
-// Uses Moonshot AI's Kimi K2.6 through NVIDIA's OpenAI-compatible NIM endpoint.
+// Uses GLM 5.2 through NVIDIA's OpenAI-compatible NIM endpoint.
 // The system prompt that grounds the assistant lives in ./_resume-context.ts.
 import { SYSTEM_PROMPT } from './_resume-context.js';
 
@@ -20,7 +20,7 @@ interface ResLike {
 }
 
 const NVIDIA_URL = 'https://integrate.api.nvidia.com/v1/chat/completions';
-const DEFAULT_MODEL = 'moonshotai/kimi-k2.6';
+const DEFAULT_MODEL = 'z-ai/glm-5.2';
 const MAX_HISTORY = 12; // keep the last N turns to bound cost
 const MAX_CHARS = 4000; // per-message guard
 
