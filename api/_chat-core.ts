@@ -79,6 +79,7 @@ export async function streamChat(opts: {
 
     if (!response.ok || !response.body) {
       const errText = (await response.text().catch(() => '')) || '';
+      console.error(`[chat] upstream ${response.status} ${model}: ${errText.slice(0, 500)}`);
       res.write(
         `\n\n[The assistant ran into an error (${response.status}). ${errText.slice(
           0,
@@ -125,6 +126,7 @@ export async function streamChat(opts: {
     res.end();
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Unknown error';
+    console.error(`[chat] stream failed (${model}): ${message}`);
     try {
       res.write(
         `\n\n[The assistant ran into an error: ${message}. Please try again, or email tejaswar8484@gmail.com.]`

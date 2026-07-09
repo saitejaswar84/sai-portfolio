@@ -13,6 +13,7 @@ export default async function handler(req: any, res: any): Promise<void> {
 
   const apiKey = process.env.NVIDIA_API_KEY;
   if (!apiKey) {
+    console.error('[chat] NVIDIA_API_KEY is not set in this deployment');
     res.statusCode = 500;
     res.end(
       'NVIDIA_API_KEY is not configured on the server. Add it in your Vercel project settings.'
