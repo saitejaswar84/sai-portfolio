@@ -366,17 +366,6 @@
   /* Refraction lensing (Chromium): displace the blurred backdrop through an
      SVG turbulence map so the pane warps the background like real glass.
      Gated behind html.lens, set at runtime only where supported. */
-  .lens .glass {
-    -webkit-backdrop-filter: blur(22px) saturate(185%) url(#liquid-lens);
-    backdrop-filter: blur(22px) saturate(185%) url(#liquid-lens);
-  }
-  /* Hovering a card switches to an animated turbulence map, so the backdrop
-     visibly undulates through the glass like disturbed water. */
-  .lens .glass-hover:hover {
-    -webkit-backdrop-filter: blur(22px) saturate(185%) url(#liquid-ripple);
-    backdrop-filter: blur(22px) saturate(185%) url(#liquid-ripple);
-  }
-
   /* Touch ripple: expanding water ring from the press point */
   .liquid-ripple-ring {
     position: absolute;

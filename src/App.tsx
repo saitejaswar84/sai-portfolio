@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { liquidGlass, type LiquidGlassHandle } from './lib/liquidGlass';
 import Nav from './components/Nav';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -51,19 +52,34 @@ export default function App() {
     return () => window.removeEventListener('pointerdown', down);
   }, []);
 
-  // Refraction lensing is Chromium-only (SVG filters inside backdrop-filter).
-  // Enable it via html.lens only where it actually renders; everyone else
-  // keeps the plain blurred glass.
+  // Real edge refraction (per deepika-builds/liquid-glass): every large
+  // glass pane gets a per-element displacement map that bends the backdrop
+  // at the rim with a chromatic prism fringe, while the interior stays
+  // crisp. Small chips and buttons keep the CSS frosted glass. Safari and
+  // Firefox fall back to frosted blur inside the module.
   useEffect(() => {
-    let supported = false;
-    try {
-      supported =
-        'chrome' in window && CSS.supports('backdrop-filter', 'url(#liquid-lens)');
-    } catch {
-      supported = false;
-    }
-    if (supported) document.documentElement.classList.add('lens');
-    return () => document.documentElement.classList.remove('lens');
+    const handles: LiquidGlassHandle[] = [];
+    const timer = window.setTimeout(() => {
+      document.querySelectorAll<HTMLElement>('.glass').forEach((el) => {
+        if (el.offsetWidth >= 220 && el.offsetHeight >= 96) {
+          handles.push(
+            liquidGlass(el, {
+              scale: -110,
+              chroma: 6,
+              border: 0.06,
+              mapBlur: 14,
+              blur: 8,
+              saturate: 1.6,
+              fallbackBlur: 22,
+            })
+          );
+        }
+      });
+    }, 60);
+    return () => {
+      clearTimeout(timer);
+      handles.forEach((h) => h.destroy());
+    };
   }, []);
 
   return (
@@ -81,65 +97,6 @@ export default function App() {
           <feComposite in="SourceGraphic" in2="g" operator="atop" />
         </filter>
 
-        {/* Static lens: glass panes warp the backdrop like real glass */}
-        <filter
-          id="liquid-lens"
-          x="-20%"
-          y="-20%"
-          width="140%"
-          height="140%"
-          colorInterpolationFilters="sRGB"
-        >
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.006 0.012"
-            numOctaves="2"
-            seed="7"
-            result="noise"
-          />
-          <feGaussianBlur in="noise" stdDeviation="2" result="soft" />
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="soft"
-            scale="52"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-        </filter>
-
-        {/* Animated lens (hover): the warp field drifts, so the backdrop
-            undulates through the pane like disturbed water */}
-        <filter
-          id="liquid-ripple"
-          x="-20%"
-          y="-20%"
-          width="140%"
-          height="140%"
-          colorInterpolationFilters="sRGB"
-        >
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.008 0.014"
-            numOctaves="2"
-            seed="3"
-            result="noise"
-          >
-            <animate
-              attributeName="baseFrequency"
-              dur="6s"
-              values="0.008 0.014;0.012 0.021;0.008 0.014"
-              repeatCount="indefinite"
-            />
-          </feTurbulence>
-          <feGaussianBlur in="noise" stdDeviation="2" result="soft" />
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="soft"
-            scale="64"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-        </filter>
       </svg>
 
       <div className="bg-ambient" aria-hidden />
