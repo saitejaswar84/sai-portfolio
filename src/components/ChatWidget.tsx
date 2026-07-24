@@ -15,7 +15,7 @@ const SUGGESTIONS = [
 ];
 
 const GREETING =
-  "Hi! I’m Sai’s AI assistant. Ask me anything about his experience, projects, or skills, like his work on RAG systems, fraud detection, or MLOps.";
+  'Hi! I’m Sai’s AI assistant. Ask me anything about his experience, projects, or skills, like his work on RAG systems, fraud detection, or MLOps.';
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
@@ -33,7 +33,7 @@ export default function ChatWidget() {
   }, []);
 
   useEffect(() => {
-    if (open) setTimeout(() => inputRef.current?.focus(), 250);
+    if (open) setTimeout(() => inputRef.current?.focus(), 200);
   }, [open]);
 
   useEffect(() => {
@@ -106,15 +106,15 @@ export default function ChatWidget() {
       <AnimatePresence>
         {!open && (
           <motion.button
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+            initial={{ scale: 0, rotate: -6 }}
+            animate={{ scale: 1, rotate: -2 }}
+            exit={{ scale: 0 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
             onClick={() => setOpen(true)}
-            className="liquid-press group fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-accent px-4 py-3 text-sm font-semibold text-on-accent shadow-lg shadow-accent/20 sm:bottom-6 sm:right-6"
+            className="btn-push fixed bottom-5 right-5 z-50 flex h-14 items-center gap-2 border-4 border-black bg-neo-accent px-4 text-sm font-black uppercase tracking-wide text-black shadow-[6px_6px_0px_0px_#000] sm:bottom-6 sm:right-6"
             aria-label="Open AI chat"
           >
-            <Sparkles size={18} />
+            <Sparkles size={20} strokeWidth={3} />
             <span className="hidden sm:inline">Ask my AI</span>
           </motion.button>
         )}
@@ -129,36 +129,39 @@ export default function ChatWidget() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.12 }}
               onClick={() => setOpen(false)}
-              className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm sm:hidden"
+              className="bg-halftone fixed inset-0 z-50 bg-black/60 sm:hidden"
             />
             <motion.div
-              initial={{ opacity: 0, y: 36, scale: 0.9 }}
+              initial={{ opacity: 0, y: 32, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 36, scale: 0.94 }}
-              transition={{ type: 'spring', stiffness: 360, damping: 26, mass: 0.9 }}
-              className="fixed inset-x-3 bottom-3 top-16 z-50 flex flex-col overflow-hidden rounded-2xl border border-line-strong bg-surface/85 shadow-2xl backdrop-blur-2xl sm:inset-auto sm:bottom-6 sm:right-6 sm:top-auto sm:h-[600px] sm:max-h-[80vh] sm:w-[400px]"
+              exit={{ opacity: 0, y: 32, scale: 0.96 }}
+              transition={{ duration: 0.18, ease: 'easeOut' }}
+              className="fixed inset-x-3 bottom-3 top-20 z-50 flex flex-col overflow-hidden border-4 border-black bg-neo-bg shadow-[10px_10px_0px_0px_#000] sm:inset-auto sm:bottom-6 sm:right-6 sm:top-auto sm:h-[600px] sm:max-h-[80vh] sm:w-[400px]"
             >
               {/* header */}
-              <div className="flex items-center justify-between border-b border-line bg-surface-2/70 px-4 py-3">
+              <div className="flex items-center justify-between border-b-4 border-black bg-neo-secondary px-4 py-3">
                 <div className="flex items-center gap-3">
-                  <span className="grid h-9 w-9 place-items-center rounded-full bg-accent/15 text-accent">
-                    <Bot size={18} />
+                  <span className="grid h-10 w-10 place-items-center border-4 border-black bg-white shadow-[3px_3px_0px_0px_#000]">
+                    <Bot size={20} strokeWidth={3} className="text-black" />
                   </span>
                   <div>
-                    <div className="text-sm font-semibold text-fg">Sai&apos;s AI Assistant</div>
-                    <div className="flex items-center gap-1.5 text-xs text-muted">
-                      <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+                    <div className="text-sm font-black uppercase tracking-wide text-black">
+                      Sai&apos;s AI Assistant
+                    </div>
+                    <div className="flex items-center gap-1.5 text-xs font-bold uppercase text-black">
+                      <span className="h-2 w-2 border border-black bg-neo-accent" />
                       Online
                     </div>
                   </div>
                 </div>
                 <button
                   onClick={() => setOpen(false)}
-                  className="grid h-8 w-8 place-items-center rounded-lg text-muted transition-colors hover:bg-white/5 hover:text-fg"
+                  className="btn-push grid h-9 w-9 place-items-center border-4 border-black bg-white shadow-[3px_3px_0px_0px_#000]"
                   aria-label="Close chat"
                 >
-                  <X size={18} />
+                  <X size={18} strokeWidth={3} />
                 </button>
               </div>
 
@@ -167,12 +170,14 @@ export default function ChatWidget() {
                 {showGreeting && (
                   <>
                     <Bubble role="assistant" content={GREETING} />
-                    <div className="space-y-2 pt-1">
-                      {SUGGESTIONS.map((q) => (
+                    <div className="space-y-2.5 pt-1">
+                      {SUGGESTIONS.map((q, i) => (
                         <button
                           key={q}
                           onClick={() => send(q)}
-                          className="glass block w-full rounded-xl px-3.5 py-2.5 text-left text-sm text-muted transition-colors hover:border-accent/40 hover:text-fg"
+                          className={`block w-full border-2 border-black bg-white px-3.5 py-2.5 text-left text-sm font-bold shadow-[3px_3px_0px_0px_#000] transition-all duration-100 hover:bg-neo-secondary active:translate-x-[2px] active:translate-y-[2px] active:shadow-none ${
+                            i % 2 === 0 ? 'rotate-[0.3deg]' : '-rotate-[0.3deg]'
+                          }`}
                         >
                           {q}
                         </button>
@@ -192,13 +197,13 @@ export default function ChatWidget() {
               </div>
 
               {/* input */}
-              <div className="border-t border-line bg-surface-2/70 p-3">
+              <div className="border-t-4 border-black bg-white p-3">
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
                     send(input);
                   }}
-                  className="flex items-end gap-2 rounded-xl border border-line bg-glass p-1.5 focus-within:border-accent/50"
+                  className="flex items-end gap-2"
                 >
                   <textarea
                     ref={inputRef}
@@ -211,19 +216,19 @@ export default function ChatWidget() {
                         send(input);
                       }
                     }}
-                    placeholder="Ask about my experience…"
-                    className="max-h-28 flex-1 resize-none bg-transparent px-2.5 py-1.5 text-sm text-fg placeholder:text-faint focus:outline-none"
+                    placeholder="ASK ABOUT MY EXPERIENCE…"
+                    className="max-h-28 min-h-12 flex-1 resize-none border-4 border-black bg-white px-3 py-2.5 text-sm font-bold text-black placeholder:text-black/40 focus:bg-neo-secondary focus:outline-none"
                   />
                   <button
                     type="submit"
                     disabled={!input.trim() || busy}
-                    className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-accent text-on-accent transition-opacity disabled:opacity-30"
+                    className="btn-push grid h-12 w-12 shrink-0 place-items-center border-4 border-black bg-neo-accent shadow-[4px_4px_0px_0px_#000] disabled:opacity-40"
                     aria-label="Send"
                   >
-                    <ArrowUp size={16} />
+                    <ArrowUp size={20} strokeWidth={3} className="text-black" />
                   </button>
                 </form>
-                <p className="mt-2 text-center text-[10px] text-faint">
+                <p className="mt-2 text-center text-[10px] font-bold uppercase tracking-wide text-black">
                   AI responses may contain mistakes. Verify important details.
                 </p>
               </div>
@@ -248,10 +253,10 @@ function Bubble({
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
       <div
-        className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
+        className={`max-w-[85%] whitespace-pre-wrap border-2 border-black px-3.5 py-2.5 text-sm font-bold leading-relaxed ${
           isUser
-            ? 'rounded-br-sm bg-accent text-on-accent'
-            : 'rounded-bl-sm border border-line bg-glass text-fg'
+            ? 'bg-black text-white shadow-[3px_3px_0px_0px_#FF6B6B]'
+            : 'bg-white text-black shadow-[3px_3px_0px_0px_#000]'
         }`}
       >
         {typing ? <TypingDots /> : content}
@@ -262,13 +267,13 @@ function Bubble({
 
 function TypingDots() {
   return (
-    <span className="flex items-center gap-1 py-1">
+    <span className="flex items-center gap-1.5 py-1">
       {[0, 1, 2].map((i) => (
         <motion.span
           key={i}
-          className="h-1.5 w-1.5 rounded-full bg-muted"
-          animate={{ opacity: [0.3, 1, 0.3] }}
-          transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
+          className="h-2 w-2 border border-black bg-neo-secondary"
+          animate={{ y: [0, -4, 0] }}
+          transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15, ease: 'easeOut' }}
         />
       ))}
     </span>

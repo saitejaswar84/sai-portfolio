@@ -3,9 +3,9 @@ import { profile } from '../data/resume';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line py-10">
+    <footer className="bg-black py-8">
       <Container className="flex items-center justify-center">
-        <p className="font-mono text-xs text-faint">
+        <p className="text-xs font-black uppercase tracking-[0.25em] text-white">
           © {new Date().getFullYear()} {profile.name}
         </p>
       </Container>

@@ -9,14 +9,14 @@ export function Container({
   className?: string;
 }) {
   return (
-    <div className={`mx-auto w-full max-w-6xl px-6 sm:px-8 ${className}`}>{children}</div>
+    <div className={`mx-auto w-full max-w-6xl px-5 sm:px-8 ${className}`}>{children}</div>
   );
 }
 
 export function Reveal({
   children,
   delay = 0,
-  y = 24,
+  y = 20,
   className = '',
 }: {
   children: ReactNode;
@@ -29,8 +29,8 @@ export function Reveal({
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.3, delay, ease: 'easeOut' }}
     >
       {children}
     </motion.div>
@@ -41,19 +41,39 @@ export function SectionHeading({
   index,
   title,
   kicker,
+  onDark = false,
 }: {
   index: string;
   title: string;
   kicker?: string;
+  onDark?: boolean;
 }) {
   return (
     <Reveal className="mb-12 sm:mb-16">
-      <div className="flex items-center gap-3 font-mono text-xs tracking-widest text-accent">
-        <span>{index}</span>
-        <span className="h-px w-10 bg-accent/50" />
-        {kicker && <span className="uppercase text-muted">{kicker}</span>}
+      <div className="flex flex-wrap items-center gap-3">
+        <span
+          className={`inline-block border-4 border-black px-3 py-1 font-black text-sm tracking-widest ${
+            onDark ? 'bg-neo-secondary text-black' : 'bg-black text-white'
+          } -rotate-2 shadow-[4px_4px_0px_0px_#000]`}
+          style={onDark ? { boxShadow: '4px 4px 0 0 #fff' } : undefined}
+        >
+          {index}
+        </span>
+        {kicker && (
+          <span
+            className={`font-black text-sm uppercase tracking-[0.25em] ${
+              onDark ? 'text-white' : 'text-black'
+            }`}
+          >
+            {kicker}
+          </span>
+        )}
       </div>
-      <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight text-fg sm:text-4xl md:text-5xl">
+      <h2
+        className={`mt-5 font-display text-4xl font-black uppercase leading-[0.95] tracking-tighter sm:text-6xl md:text-7xl ${
+          onDark ? 'text-white' : 'text-black'
+        }`}
+      >
         {title}
       </h2>
     </Reveal>
@@ -62,7 +82,7 @@ export function SectionHeading({
 
 export function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="glass rounded-full px-3 py-1 font-mono text-xs text-muted transition-colors hover:border-accent/40 hover:text-fg">
+    <span className="inline-block border-2 border-black bg-white px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-black shadow-[3px_3px_0px_0px_#000]">
       {children}
     </span>
   );

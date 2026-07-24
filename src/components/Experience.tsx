@@ -3,57 +3,61 @@ import { experience } from '../data/resume';
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 sm:py-32">
+    <section
+      id="experience"
+      className="border-y-4 border-black bg-neo-secondary py-20 sm:py-28"
+    >
       <Container>
         <SectionHeading index="02" kicker="Experience" title="Where I've built things" />
 
-        <div className="relative">
-          {/* timeline rail */}
-          <div className="absolute left-0 top-2 bottom-2 hidden w-px bg-line md:block" />
+        <div className="flex flex-col gap-10">
+          {experience.map((job, i) => (
+            <Reveal key={job.company} delay={i * 0.05}>
+              <article
+                className={`card-lift relative border-4 border-black bg-white shadow-[10px_10px_0px_0px_#000] hover:shadow-[14px_14px_0px_0px_#000] ${
+                  i % 2 === 0 ? 'rotate-[0.3deg]' : '-rotate-[0.3deg]'
+                }`}
+              >
+                {job.current && (
+                  <span className="absolute -top-5 right-6 rotate-3 border-4 border-black bg-neo-accent px-3 py-1 text-xs font-black uppercase tracking-widest shadow-[4px_4px_0px_0px_#000]">
+                    Current
+                  </span>
+                )}
 
-          <div className="flex flex-col gap-10">
-            {experience.map((job, i) => (
-              <Reveal key={job.company} delay={i * 0.05}>
-                <article className="group relative md:pl-10">
-                  <span className="absolute left-[-4px] top-2.5 hidden h-2.5 w-2.5 rounded-full bg-faint ring-4 ring-ink transition-colors group-hover:bg-accent md:block" />
+                {/* Card header strip */}
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b-4 border-black bg-neo-muted px-6 py-4 sm:px-7">
+                  <h3 className="font-display text-2xl font-black uppercase tracking-tight text-black sm:text-3xl">
+                    {job.company}
+                    <span className="ml-3 text-base font-bold normal-case">· {job.location}</span>
+                  </h3>
+                  <span className="border-2 border-black bg-white px-2.5 py-1 text-xs font-black uppercase tracking-wide shadow-[3px_3px_0px_0px_#000]">
+                    {job.period}
+                  </span>
+                </div>
 
-                  <div className="glass glass-hover rounded-2xl p-6 sm:p-7">
-                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                      <h3 className="font-display text-xl font-semibold text-fg">
-                        {job.company}
-                        <span className="ml-2 text-base font-normal text-muted">· {job.location}</span>
-                      </h3>
-                      <span className="font-mono text-xs text-faint">{job.period}</span>
-                    </div>
+                <div className="p-6 sm:p-7">
+                  <p className="inline-block bg-black px-3 py-1 font-black uppercase tracking-wide text-white">
+                    {job.role}
+                  </p>
 
-                    <div className="mt-1 flex items-center gap-2">
-                      <p className="font-medium text-accent">{job.role}</p>
-                      {job.current && (
-                        <span className="rounded-full bg-accent/15 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-accent">
-                          Current
-                        </span>
-                      )}
-                    </div>
+                  <ul className="mt-6 space-y-3">
+                    {job.highlights.map((h, j) => (
+                      <li key={j} className="flex gap-3 text-base font-medium leading-snug">
+                        <span className="mt-2 h-2.5 w-2.5 shrink-0 border-2 border-black bg-neo-accent" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                    <ul className="mt-5 space-y-3">
-                      {job.highlights.map((h, j) => (
-                        <li key={j} className="flex gap-3 text-sm leading-relaxed text-muted">
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent/70" />
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {job.stack.map((s) => (
-                        <Tag key={s}>{s}</Tag>
-                      ))}
-                    </div>
+                  <div className="mt-6 flex flex-wrap gap-2.5">
+                    {job.stack.map((s) => (
+                      <Tag key={s}>{s}</Tag>
+                    ))}
                   </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
+                </div>
+              </article>
+            </Reveal>
+          ))}
         </div>
       </Container>
     </section>

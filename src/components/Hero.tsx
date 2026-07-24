@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Sparkles, FileText, MapPin } from 'lucide-react';
+import { ArrowRight, Sparkles, FileText, MapPin, Star } from 'lucide-react';
 import { Container } from './primitives';
 import { profile, stats } from '../data/resume';
 
 function RotatingRole() {
   const [i, setI] = useState(0);
   useEffect(() => {
-    const t = setInterval(() => setI((v) => (v + 1) % profile.roles.length), 2600);
+    const t = setInterval(() => setI((v) => (v + 1) % profile.roles.length), 2400);
     return () => clearInterval(t);
   }, []);
   return (
-    <span className="relative inline-block align-bottom">
+    <span className="relative inline-block overflow-hidden border-4 border-black bg-neo-secondary px-4 py-2 shadow-[6px_6px_0px_0px_#000] -rotate-1">
       <AnimatePresence mode="wait">
         <motion.span
           key={i}
-          initial={{ y: 18, opacity: 0 }}
+          initial={{ y: 24, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -18, opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="inline-block accent-gradient-text"
+          exit={{ y: -24, opacity: 0 }}
+          transition={{ duration: 0.18, ease: 'easeOut' }}
+          className="inline-block font-black uppercase tracking-tight text-black"
         >
           {profile.roles[i]}
         </motion.span>
@@ -28,106 +28,133 @@ function RotatingRole() {
   );
 }
 
+const statColors = ['bg-white', 'bg-neo-secondary', 'bg-neo-muted', 'bg-neo-accent'];
+const statTilts = ['-rotate-1', 'rotate-1', '-rotate-1', 'rotate-1'];
+
 export default function Hero() {
   return (
-    <section id="top" className="relative flex min-h-screen items-center pt-24 pb-16">
+    <section id="top" className="bg-graph relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-20">
+      {/* Floating primitive shapes — the chaos zone */}
+      <Star
+        className="animate-spin-slow absolute right-[8%] top-24 hidden h-16 w-16 fill-neo-secondary text-black lg:block"
+        strokeWidth={2.5}
+        aria-hidden
+      />
+      <div
+        className="absolute -right-8 top-1/2 hidden h-24 w-24 rounded-full border-4 border-black bg-neo-muted lg:block"
+        aria-hidden
+      />
+      <div
+        className="absolute right-[18%] top-[62%] hidden h-12 w-12 rotate-12 border-4 border-black bg-neo-accent shadow-[6px_6px_0px_0px_#000] lg:block"
+        aria-hidden
+      />
+
       <Container>
-        <div className="max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="glass inline-flex items-center gap-2 rounded-full px-3 py-1.5 font-mono text-xs text-muted"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-            </span>
-            Available for AI/ML roles
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight text-fg sm:text-6xl md:text-7xl"
-          >
-            {profile.name}
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-4 font-display text-2xl font-medium tracking-tight text-muted sm:text-3xl"
-          >
-            <RotatingRole />
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 max-w-2xl text-lg leading-relaxed text-muted text-balance"
-          >
-            {profile.tagline}
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-9 flex flex-wrap items-center gap-3"
-          >
-            <button
-              onClick={() => window.dispatchEvent(new Event('open-chat'))}
-              className="liquid-press group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-on-accent"
-            >
-              <Sparkles size={16} />
-              Ask my AI anything
-            </button>
-            <a
-              href="#projects"
-              className="glass glass-hover group inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-fg"
-            >
-              View work
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-            </a>
-            <a
-              href="/Sai-Tejaswar-Reddy-Dalli-Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full px-4 py-3 text-sm font-medium text-muted transition-colors hover:text-fg"
-            >
-              <FileText size={16} />
-              Resume
-            </a>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.38 }}
-            className="mt-6 inline-flex items-center gap-2 font-mono text-xs text-faint"
-          >
-            <MapPin size={13} />
-            {profile.location} · {profile.relocation}
-          </motion.div>
-        </div>
-
-        {/* Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-16 grid grid-cols-2 gap-3 sm:mt-20 lg:grid-cols-4"
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="inline-flex -rotate-2 items-center gap-2 border-4 border-black bg-white px-4 py-1.5 text-xs font-black uppercase tracking-widest shadow-[4px_4px_0px_0px_#000]"
         >
-          {stats.map((s) => (
-            <div key={s.label} className="glass rounded-2xl p-5 sm:p-6">
-              <div className="font-display text-3xl font-semibold tracking-tight text-fg sm:text-4xl">
+          <span className="h-2.5 w-2.5 animate-pulse rounded-full border-2 border-black bg-neo-accent" />
+          Available for AI/ML roles
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.05, ease: 'easeOut' }}
+          className="mt-8 font-display font-black uppercase leading-[0.85] tracking-tighter"
+        >
+          <span className="block text-5xl text-black sm:text-7xl md:text-8xl">
+            Sai Tejaswar
+          </span>
+          <span className="text-stroke block text-5xl sm:text-7xl md:text-8xl">
+            Reddy Dalli
+          </span>
+        </motion.h1>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.12, ease: 'easeOut' }}
+          className="mt-8 text-xl sm:text-2xl"
+        >
+          <RotatingRole />
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.18, ease: 'easeOut' }}
+          className="mt-8 max-w-2xl border-l-8 border-black bg-white p-4 text-lg font-bold leading-snug shadow-[6px_6px_0px_0px_#000] sm:text-xl"
+        >
+          {profile.tagline}
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.24, ease: 'easeOut' }}
+          className="mt-10 flex flex-wrap items-center gap-4"
+        >
+          <button
+            onClick={() => window.dispatchEvent(new Event('open-chat'))}
+            className="btn-push inline-flex h-14 w-full items-center justify-center gap-2 border-4 border-black bg-neo-accent px-6 text-sm font-black uppercase tracking-wide text-black shadow-[6px_6px_0px_0px_#000] sm:w-auto"
+          >
+            <Sparkles size={18} strokeWidth={3} />
+            Ask my AI anything
+          </button>
+          <a
+            href="#projects"
+            className="btn-push group inline-flex h-14 w-full items-center justify-center gap-2 border-4 border-black bg-white px-6 text-sm font-black uppercase tracking-wide text-black shadow-[6px_6px_0px_0px_#000] sm:w-auto"
+          >
+            View work
+            <ArrowRight
+              size={18}
+              strokeWidth={3}
+              className="transition-transform duration-100 group-hover:translate-x-1"
+            />
+          </a>
+          <a
+            href="/Sai-Tejaswar-Reddy-Dalli-Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-14 items-center gap-2 border-b-4 border-transparent px-2 text-sm font-black uppercase tracking-wide text-black transition-all duration-100 hover:border-black"
+          >
+            <FileText size={18} strokeWidth={3} />
+            Resume
+          </a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: 0.3 }}
+          className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wide"
+        >
+          <MapPin size={16} strokeWidth={3} />
+          {profile.location} · {profile.relocation}
+        </motion.div>
+
+        {/* Stats — a row of colored sticker cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, delay: 0.36, ease: 'easeOut' }}
+          className="mt-14 grid grid-cols-2 gap-5 sm:mt-20 lg:grid-cols-4"
+        >
+          {stats.map((s, i) => (
+            <div
+              key={s.label}
+              className={`card-lift border-4 border-black p-5 shadow-[8px_8px_0px_0px_#000] sm:p-6 ${statColors[i % 4]} ${statTilts[i % 4]}`}
+            >
+              <div className="font-display text-4xl font-black tracking-tighter text-black sm:text-5xl">
                 {s.value}
               </div>
-              <div className="mt-1 text-sm text-muted">{s.label}</div>
+              <div className="mt-1.5 text-sm font-bold uppercase tracking-wide text-black">
+                {s.label}
+              </div>
             </div>
           ))}
         </motion.div>

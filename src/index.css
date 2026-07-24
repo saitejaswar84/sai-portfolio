@@ -1,158 +1,57 @@
 @import 'tailwindcss';
 
-/* Class-based dark mode (toggled on <html>) */
-@custom-variant dark (&:where(.dark, .dark *));
-
-/* Registered so the iridescent rim angle can animate smoothly */
-@property --iri {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
 @theme {
-  /* Semantic tokens resolve to runtime CSS vars so they swap per theme */
-  --color-ink: var(--c-ink);
-  --color-surface: var(--c-surface);
-  --color-surface-2: var(--c-surface-2);
-  --color-line: var(--c-line);
-  --color-line-strong: var(--c-line-strong);
-  --color-fg: var(--c-fg);
-  --color-muted: var(--c-muted);
-  --color-faint: var(--c-faint);
-  --color-accent: var(--c-accent);
-  --color-accent-2: var(--c-accent-2);
-  --color-on-accent: var(--c-on-accent);
-  --color-glass: var(--c-glass);
+  /* Neo-brutalist pop palette — single light mode, no grays allowed */
+  --color-neo-bg: #fffdf5; /* cream canvas */
+  --color-neo-ink: #000000; /* structural black */
+  --color-neo-accent: #ff6b6b; /* hot red */
+  --color-neo-secondary: #ffd93d; /* vivid yellow */
+  --color-neo-muted: #c4b5fd; /* soft violet */
 
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-}
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
 
-/* ---------------- Light theme (default) ---------------- */
-:root,
-.light {
-  --c-ink: #eceef1;
-  --c-surface: #ffffff;
-  --c-surface-2: #f3f4f6;
-  --c-line: rgba(15, 23, 30, 0.1);
-  --c-line-strong: rgba(15, 23, 30, 0.18);
-  --c-fg: #14171b;
-  --c-muted: #515860;
-  --c-faint: #868d95;
-  --c-accent: #0a9b67;
-  --c-accent-2: #0a85c2;
-  --c-on-accent: #ffffff;
-  --c-glass: rgba(255, 255, 255, 0.5);
-
-  --glass-fill: rgba(255, 255, 255, 0.5);
-  --glass-fill-strong: rgba(255, 255, 255, 0.72);
-  --glass-edge: rgba(15, 23, 30, 0.09);
-  --glass-border: rgba(15, 23, 30, 0.14);
-  --glass-highlight: rgba(255, 255, 255, 0.95);
-  --glass-highlight-soft: rgba(255, 255, 255, 0.55);
-  --glass-shade: rgba(15, 23, 30, 0.06);
-  --glass-shade-soft: rgba(15, 23, 30, 0.03);
-  --glass-tint-top: rgba(255, 255, 255, 0.6);
-  --glass-sheen: rgba(255, 255, 255, 0.45);
-  --glass-shadow: 0 16px 40px -18px rgba(15, 23, 30, 0.28);
-
-  --grid-line: rgba(15, 23, 30, 0.04);
-
-  /* Liquid metaballs (light): soft pastel drops, clearly visible */
-  --liquid-opacity: 0.5;
-  --drop-1: #7fdcba;
-  --drop-hi-1: #d9fff0;
-  --drop-2: #93cdf3;
-  --drop-hi-2: #e3f4ff;
-  --drop-3: #f4d9a0;
-  --drop-hi-3: #fff3d6;
-
-  /* Iridescent rim intensity */
-  --iri-a: 0.65;
-
-  color-scheme: light;
-}
-
-/* ---------------- Dark theme ---------------- */
-.dark {
-  --c-ink: #07080a;
-  --c-surface: #111317;
-  --c-surface-2: #16191e;
-  --c-line: rgba(255, 255, 255, 0.09);
-  --c-line-strong: rgba(255, 255, 255, 0.16);
-  --c-fg: #ecedef;
-  --c-muted: #9aa1ab;
-  --c-faint: #626973;
-  --c-accent: #3ddc97;
-  --c-accent-2: #5ad1ff;
-  --c-on-accent: #04150d;
-  --c-glass: rgba(255, 255, 255, 0.045);
-
-  --glass-fill: rgba(255, 255, 255, 0.05);
-  --glass-fill-strong: rgba(255, 255, 255, 0.09);
-  --glass-edge: rgba(255, 255, 255, 0.12);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-highlight: rgba(255, 255, 255, 0.18);
-  --glass-highlight-soft: rgba(255, 255, 255, 0.07);
-  --glass-shade: rgba(0, 0, 0, 0.4);
-  --glass-shade-soft: rgba(0, 0, 0, 0.22);
-  --glass-tint-top: rgba(255, 255, 255, 0.07);
-  --glass-sheen: rgba(255, 255, 255, 0.17);
-  --glass-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.7);
-
-  --grid-line: rgba(255, 255, 255, 0.025);
-
-  /* Liquid metaballs (dark): deep neon drops */
-  --liquid-opacity: 0.4;
-  --drop-1: #0e7d55;
-  --drop-hi-1: #2fbd83;
-  --drop-2: #135f8c;
-  --drop-hi-2: #3aa9dd;
-  --drop-3: #47239e;
-  --drop-hi-3: #7c4dd8;
-
-  /* Iridescent rim intensity */
-  --iri-a: 0.5;
-
-  color-scheme: dark;
+  --animate-spin-slow: spin-slow 10s linear infinite;
+  --animate-marquee: marquee 22s linear infinite;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: var(--color-ink);
-    transition: background-color 0.45s ease;
   }
 
   body {
-    background: transparent;
-    color: var(--color-fg);
+    background-color: var(--color-neo-bg);
+    color: var(--color-neo-ink);
     font-family: var(--font-sans);
+    font-weight: 500;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
-    transition: color 0.45s ease;
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--color-accent) 28%, transparent);
-    color: var(--color-fg);
+    background: var(--color-neo-secondary);
+    color: #000;
   }
 
+  /* Chunky, honest scrollbar */
   ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 14px;
   }
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: var(--color-neo-bg);
+    border-left: 2px solid #000;
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-line-strong);
-    border-radius: 99px;
-    border: 2px solid transparent;
-    background-clip: padding-box;
+    background: #000;
+    border: 3px solid var(--color-neo-bg);
+  }
+
+  /* Thick, visible focus everywhere */
+  :focus-visible {
+    outline: 3px solid #000;
+    outline-offset: 3px;
   }
 }
 
@@ -161,261 +60,99 @@
     text-wrap: balance;
   }
 
-  .accent-gradient-text {
-    background: linear-gradient(110deg, var(--color-accent), var(--color-accent-2));
-    -webkit-background-clip: text;
-    background-clip: text;
+  /* ---------- Typography treatments ---------- */
+  /* Hollow display text: transparent fill, thick black outline */
+  .text-stroke {
+    -webkit-text-stroke: 2.5px #000;
+    color: transparent;
+  }
+  .text-stroke-white {
+    -webkit-text-stroke: 2.5px #fff;
     color: transparent;
   }
 
-  /* ---------- Liquid background ---------- */
-  .bg-ambient {
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    pointer-events: none;
+  /* Hard text shadow for headlines on colored blocks */
+  .text-shadow-hard {
+    text-shadow: 5px 5px 0 #000;
   }
-  .bg-ambient::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+
+  /* ---------- Background textures (never leave a surface flat) ---------- */
+  .bg-graph {
     background-image:
-      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-    background-size: 58px 58px;
-    mask-image: radial-gradient(circle at 50% 0%, black, transparent 88%);
+      linear-gradient(to right, rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .bg-halftone {
+    background-image: radial-gradient(#000 1.5px, transparent 1.5px);
+    background-size: 20px 20px;
+  }
+  .bg-dots {
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0.35) 2px, transparent 2.5px);
+    background-size: 28px 28px;
   }
 
-  /* ---------- Liquid metaball background (lava-lamp) ---------- */
-  /* Drops run through an SVG gooey filter (#goo): when two drops approach,
-     their silhouettes melt together and pull apart like real liquid. */
-  .liquid-bg {
-    position: fixed;
-    inset: -12%;
-    z-index: -1;
-    pointer-events: none;
-    filter: url(#goo);
-    opacity: var(--liquid-opacity);
-  }
-  .drop {
-    position: absolute;
-    border-radius: 50%;
-    will-change: transform;
-  }
-  .drop-1 {
-    width: 44vmin; height: 44vmin; top: 2%; left: 58%;
-    background: radial-gradient(circle at 35% 30%, var(--drop-hi-1), var(--drop-1) 70%);
-    animation: float-1 26s ease-in-out infinite alternate;
-  }
-  .drop-2 {
-    width: 34vmin; height: 34vmin; top: 14%; left: 78%;
-    background: radial-gradient(circle at 35% 30%, var(--drop-hi-2), var(--drop-2) 70%);
-    animation: float-2 21s ease-in-out infinite alternate;
-  }
-  .drop-3 {
-    width: 40vmin; height: 40vmin; top: 42%; left: -6%;
-    background: radial-gradient(circle at 35% 30%, var(--drop-hi-2), var(--drop-2) 70%);
-    animation: float-3 29s ease-in-out infinite alternate;
-  }
-  .drop-4 {
-    width: 26vmin; height: 26vmin; top: 60%; left: 16%;
-    background: radial-gradient(circle at 35% 30%, var(--drop-hi-1), var(--drop-1) 70%);
-    animation: float-4 17s ease-in-out infinite alternate;
-  }
-  .drop-5 {
-    width: 38vmin; height: 38vmin; top: 74%; left: 56%;
-    background: radial-gradient(circle at 35% 30%, var(--drop-hi-3), var(--drop-3) 70%);
-    animation: float-5 24s ease-in-out infinite alternate;
-  }
-  .drop-6 {
-    width: 22vmin; height: 22vmin; top: 86%; left: 82%;
-    background: radial-gradient(circle at 35% 30%, var(--drop-hi-3), var(--drop-3) 70%);
-    animation: float-6 15s ease-in-out infinite alternate;
-  }
-
-  @keyframes float-1 {
-    0% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(-16vw, 20vh, 0) scale(1.18); }
-    100% { transform: translate3d(-30vw, 6vh, 0) scale(0.92); }
-  }
-  @keyframes float-2 {
-    0% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(-24vw, 8vh, 0) scale(0.85); }
-    100% { transform: translate3d(-10vw, 30vh, 0) scale(1.22); }
-  }
-  @keyframes float-3 {
-    0% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(18vw, -12vh, 0) scale(1.15); }
-    100% { transform: translate3d(30vw, 10vh, 0) scale(0.9); }
-  }
-  @keyframes float-4 {
-    0% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(14vw, -22vh, 0) scale(1.3); }
-    100% { transform: translate3d(4vw, -36vh, 0) scale(1); }
-  }
-  @keyframes float-5 {
-    0% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(-14vw, -16vh, 0) scale(0.88); }
-    100% { transform: translate3d(10vw, -30vh, 0) scale(1.2); }
-  }
-  @keyframes float-6 {
-    0% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(-20vw, -10vh, 0) scale(1.25); }
-    100% { transform: translate3d(-34vw, -24vh, 0) scale(0.95); }
-  }
-
-  /* ---------- Glass surfaces ---------- */
-  /* Layered "liquid glass": tinted fill + top-light gradient, deep blur with
-     saturation so the backdrop blobs refract through, and a lit rim (bright
-     top edge, shaded bottom edge) that reads as physical thickness. */
-  .glass {
-    background-image: linear-gradient(155deg, var(--glass-tint-top), transparent 42%);
-    background-color: var(--glass-fill);
-    -webkit-backdrop-filter: blur(22px) saturate(185%);
-    backdrop-filter: blur(22px) saturate(185%);
-    border: 1px solid var(--glass-edge);
-    box-shadow:
-      var(--glass-shadow),
-      inset 0 1px 0 0 var(--glass-highlight),
-      inset 1px 0 0 0 var(--glass-highlight-soft),
-      inset 0 -1px 0 0 var(--glass-shade),
-      inset -1px 0 0 0 var(--glass-shade-soft);
-  }
-  .glass-strong {
-    background-color: var(--glass-fill-strong);
-  }
-
-  .glass-hover {
-    position: relative;
+  /* ---------- Mechanical interactions ---------- */
+  /* Button push: click down to cover the shadow, like a physical switch */
+  .btn-push {
     transition:
-      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-      background-color 0.3s ease,
-      border-color 0.3s ease,
-      box-shadow 0.3s ease;
+      transform 100ms linear,
+      box-shadow 100ms linear,
+      background-color 100ms linear;
   }
-  /* Iridescent soap-bubble rim: thin ring of shifting spectral color that
-     rotates around the pane edge while hovered. */
-  .glass-hover::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1.5px;
-    pointer-events: none;
-    background: conic-gradient(
-      from var(--iri),
-      transparent 0% 8%,
-      rgba(255, 128, 210, var(--iri-a)) 16%,
-      rgba(90, 209, 255, var(--iri-a)) 28%,
-      transparent 38% 55%,
-      rgba(61, 220, 151, var(--iri-a)) 66%,
-      rgba(255, 214, 120, var(--iri-a)) 76%,
-      transparent 86% 100%
-    );
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.45s ease;
-    animation: iridesce 5s linear infinite;
+  .btn-push:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 0 #000 !important;
   }
-  .glass-hover:hover::before {
-    opacity: 1;
+
+  /* Card lift: rises off the board while its ink shadow grows */
+  .card-lift {
+    transition:
+      transform 200ms ease-out,
+      box-shadow 200ms ease-out;
   }
-  @keyframes iridesce {
+  .card-lift:hover {
+    transform: translate(-2px, -6px);
+  }
+
+  /* ---------- Marquee strip ---------- */
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: var(--animate-marquee);
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
     to {
-      --iri: 360deg;
+      transform: translateX(-50%);
     }
   }
 
-  /* Liquid specular: a soft light spot that follows the pointer across the
-     pane (updated via --mx/--my from a global pointermove listener). */
-  .glass-hover::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    background: radial-gradient(
-      280px circle at var(--mx, 50%) var(--my, 35%),
-      var(--glass-sheen),
-      transparent 65%
-    );
-    opacity: 0;
-    transition: opacity 0.35s ease;
-  }
-  .glass-hover:hover::after {
-    opacity: 1;
-  }
-  .glass-hover:hover {
-    transform: translateY(-4px);
-    background-color: var(--glass-fill-strong);
-    border-color: color-mix(in oklab, var(--color-accent) 40%, var(--glass-edge));
-    box-shadow:
-      var(--glass-shadow),
-      inset 0 1px 0 0 var(--glass-highlight),
-      inset 0 -1px 0 0 var(--glass-shade),
-      0 0 28px -8px color-mix(in oklab, var(--color-accent) 45%, transparent);
-  }
-
-  /* Refraction lensing (Chromium): displace the blurred backdrop through an
-     SVG turbulence map so the pane warps the background like real glass.
-     Gated behind html.lens, set at runtime only where supported. */
-  /* Touch ripple: expanding water ring from the press point */
-  .liquid-ripple-ring {
-    position: absolute;
-    width: 340px;
-    height: 340px;
-    margin: -170px 0 0 -170px;
-    border-radius: 50%;
-    pointer-events: none;
-    background: radial-gradient(circle, var(--glass-sheen) 0%, transparent 62%);
-    box-shadow: inset 0 0 0 1.5px var(--glass-highlight);
-    transform: scale(0);
-    opacity: 0.9;
-    animation: ripple-out 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-  @keyframes ripple-out {
-    to {
-      transform: scale(1);
-      opacity: 0;
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
     }
-  }
-
-  /* Jelly interaction: springy overshoot on hover, liquid compress on press */
-  .liquid-press {
-    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    will-change: transform;
-  }
-  .liquid-press:hover {
-    transform: scale(1.05);
-  }
-  .liquid-press:active {
-    transform: scale(0.94);
-    transition-duration: 0.12s;
-  }
-
-  /* Frosted nav bar */
-  .glass-nav {
-    background-color: color-mix(in srgb, var(--c-ink) 55%, transparent);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    backdrop-filter: blur(24px) saturate(180%);
-    border-bottom: 1px solid var(--glass-edge);
-    box-shadow: 0 12px 32px -24px rgba(0, 0, 0, 0.5);
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .drop,
-    .liquid-ripple-ring {
-      animation: none;
-    }
     html {
       scroll-behavior: auto;
+    }
+    .marquee-track,
+    .animate-spin-slow,
+    .animate-bounce,
+    .animate-pulse {
+      animation: none;
+    }
+    .card-lift,
+    .btn-push {
+      transition: none;
     }
   }
 }
