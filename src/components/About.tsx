@@ -25,7 +25,7 @@ const pillars = [
     icon: Network,
     color: 'bg-white',
     title: 'Data Engineering',
-    body: 'Large-scale pipelines on GCP and AWS — BigQuery, Dataflow, SageMaker, and PySpark.',
+    body: 'Large-scale pipelines on GCP and AWS: BigQuery, Dataflow, SageMaker, and PySpark.',
   },
 ];
 
@@ -44,7 +44,7 @@ export default function About() {
             </p>
             <p className="mt-6 border-4 border-black bg-neo-bg p-5 text-lg font-medium leading-relaxed shadow-[6px_6px_0px_0px_#000]">
               Across financial services and enterprise domains, I&apos;ve shipped systems that move
-              real metrics — faster retrieval, higher fraud-detection accuracy, and shorter
+              real metrics: faster retrieval, higher fraud-detection accuracy, and shorter
               deployment cycles. I care about the whole lifecycle: getting models right{' '}
               <span className="bg-neo-secondary px-1 font-bold">and</span> getting them safely
               into production with governance, monitoring, and clear stakeholder reporting.

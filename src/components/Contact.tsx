@@ -22,7 +22,7 @@ export default function Contact() {
       <Container>
         <Reveal>
           <span className="inline-block -rotate-2 border-4 border-black bg-white px-3 py-1 text-sm font-black uppercase tracking-[0.25em] shadow-[4px_4px_0px_0px_#000]">
-            06 — Contact
+            06 / Contact
           </span>
           <h2 className="text-shadow-hard mt-6 max-w-3xl font-display text-5xl font-black uppercase leading-[0.9] tracking-tighter text-white sm:text-7xl">
             Let&apos;s build something intelligent.

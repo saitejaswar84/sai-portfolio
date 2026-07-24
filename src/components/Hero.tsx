@@ -34,7 +34,7 @@ const statTilts = ['-rotate-1', 'rotate-1', '-rotate-1', 'rotate-1'];
 export default function Hero() {
   return (
     <section id="top" className="bg-graph relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-20">
-      {/* Floating primitive shapes — the chaos zone */}
+      {/* Floating primitive shapes (the chaos zone) */}
       <Star
         className="animate-spin-slow absolute right-[8%] top-24 hidden h-16 w-16 fill-neo-secondary text-black lg:block"
         strokeWidth={2.5}
@@ -137,7 +137,7 @@ export default function Hero() {
           {profile.location} · {profile.relocation}
         </motion.div>
 
-        {/* Stats — a row of colored sticker cards */}
+        {/* Stats: a row of colored sticker cards */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}

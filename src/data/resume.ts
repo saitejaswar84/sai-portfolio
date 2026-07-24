@@ -10,9 +10,9 @@ export const profile = {
     'Fraud Detection Systems',
   ],
   tagline:
-    'I build scalable machine learning, generative AI, and data-driven systems — from RAG and multi-agent platforms to fraud detection and production MLOps.',
+    'I build scalable machine learning, generative AI, and data-driven systems, from RAG and multi-agent platforms to fraud detection and production MLOps.',
   summary:
-    'AI/ML Engineer with around 5 years of experience building scalable machine learning, generative AI, and data-driven solutions across financial services and enterprise domains. I work end-to-end — from fine-tuning LLMs and designing RAG pipelines to shipping governed, monitored models in production with CI/CD.',
+    'AI/ML Engineer with around 5 years of experience building scalable machine learning, generative AI, and data-driven solutions across financial services and enterprise domains. I work end-to-end, from fine-tuning LLMs and designing RAG pipelines to shipping governed, monitored models in production with CI/CD.',
   location: 'California, USA',
   relocation: 'Open to relocation',
   email: 'tejaswar8484@gmail.com',
@@ -43,11 +43,11 @@ export const experience: Experience[] = [
     company: 'American Express',
     location: 'USA',
     role: 'AI Engineer',
-    period: 'Aug 2025 – Present',
+    period: 'Aug 2025 - Present',
     current: true,
     highlights: [
       'Built enterprise-grade AI solutions using GPT-4, LangChain, and RAG with Pinecone and ChromaDB, enabling real-time retrieval across 15M+ customer interaction records and cutting analyst research time by 45%.',
-      'Engineered fine-tuned transformer models with TensorFlow and LlamaIndex to automate fraud-risk classification and support workflows — improving prediction accuracy by 28% and reducing manual case handling by 35%.',
+      'Engineered fine-tuned transformer models with TensorFlow and LlamaIndex to automate fraud-risk classification and support workflows, improving prediction accuracy by 28% and reducing manual case handling by 35%.',
       'Developed MLOps infrastructure with MLflow and GitHub Actions CI/CD, accelerating deployment cycles by 40% while ensuring governance, reproducibility, and compliance.',
       'Implemented explainable AI with SHAP and LIME for XGBoost credit-risk and underwriting models, improving transparency for regulatory audits.',
       'Spearheaded multi-agent AI systems with LangChain orchestration and RAG, increasing operational efficiency by 30% and reducing response turnaround by 50%.',
@@ -58,9 +58,9 @@ export const experience: Experience[] = [
     company: 'Infosys',
     location: 'India',
     role: 'AI/ML Engineer',
-    period: 'Feb 2020 – Jan 2023',
+    period: 'Feb 2020 - Jan 2023',
     highlights: [
-      'Designed fraud-detection pipelines with BigQuery ML, GCP Dataflow, and PostgreSQL processing 20M+ transactional records daily — improving fraud identification accuracy by 32% and reducing false positives by 25%.',
+      'Designed fraud-detection pipelines with BigQuery ML, GCP Dataflow, and PostgreSQL processing 20M+ transactional records daily, improving fraud identification accuracy by 32% and reducing false positives by 25%.',
       'Built scalable ML workflows with TensorFlow Extended (TFX), Vertex AI, Docker, and GKE, reducing release cycles by 40%.',
       'Optimized forecasting models with LightGBM, ARIMA, and Prophet, increasing forecasting accuracy by 27%.',
       'Implemented computer vision and NLP with Mask R-CNN, NER, and NLTK to automate document classification and invoice extraction, reducing manual processing by 50%.',
@@ -72,7 +72,7 @@ export const experience: Experience[] = [
     company: 'Hexaware Technologies',
     location: 'India',
     role: 'Junior Data Scientist',
-    period: 'Jan 2019 – Jan 2020',
+    period: 'Jan 2019 - Jan 2020',
     highlights: [
       'Analyzed structured and unstructured datasets with Python, SQL, Pandas, NumPy, and EDA, improving reporting accuracy by 25%.',
       'Built predictive models (Decision Trees, Random Forests, Naive Bayes, XGBoost) improving churn prediction accuracy by 30%.',
@@ -149,7 +149,7 @@ export const projects: Project[] = [
     stack: ['LLaMA', 'PEFT / LoRA', 'Hugging Face', 'PyTorch', 'Evaluation'],
   },
   {
-    name: 'Ficopilot — AI Financial Agent',
+    name: 'Ficopilot: AI Financial Agent',
     org: 'Personal project',
     blurb: 'Natural-language financial analysis over your own spreadsheets.',
     highlights: [
@@ -221,11 +221,11 @@ export const skillGroups: SkillGroup[] = [
   {
     label: 'Cloud',
     items: [
-      'GCP — Vertex AI',
+      'GCP: Vertex AI',
       'BigQuery',
       'Dataflow',
       'Cloud Composer',
-      'AWS — SageMaker',
+      'AWS: SageMaker',
       'S3 / Lambda',
       'Azure ML Studio',
       'Databricks',
@@ -275,9 +275,9 @@ export const education: Education[] = [
 
 export const certifications = [
   'AWS Certified AI Practitioner',
-  'Generative AI with AWS — Udacity',
-  'Model Context Protocol (MCP) for Beginners — Microsoft',
+  'Generative AI with AWS, Udacity',
+  'Model Context Protocol (MCP) for Beginners, Microsoft',
   'Scientific Computing with Python',
-  'AWS Academy Graduate — ML through Application',
+  'AWS Academy Graduate: ML through Application',
   'Infrastructure & App Modernization with Google Cloud',
 ];

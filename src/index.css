@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
-  /* Neo-brutalist pop palette — single light mode, no grays allowed */
+  /* Neo-brutalist pop palette (single light mode, no grays) */
   --color-neo-bg: #fffdf5; /* cream canvas */
   --color-neo-ink: #000000; /* structural black */
   --color-neo-accent: #ff6b6b; /* hot red */
