@@ -3,7 +3,7 @@
   "framework": "vite",
   "functions": {
     "api/chat.ts": {
-      "maxDuration": 30
+      "maxDuration": 60
     }
   }
 }
