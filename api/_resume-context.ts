@@ -20,7 +20,7 @@ Name: Sai Tejaswar Reddy Dalli
 Role: AI/ML Engineer (~5 years of experience)
 Location: California, USA (open to relocation)
 Email: tejaswar8484@gmail.com
-Phone: +1 (562) 569-3720
+Phone: +1 (562) 666-1626
 
 Summary: AI/ML Engineer with around 5 years of experience building scalable machine learning, generative AI, and data-driven solutions across financial services and enterprise domains. Skilled in Python, TensorFlow, PyTorch, XGBoost, LLMs, RAG, LangChain, AWS, and GCP for developing predictive models, fraud detection systems, NLP applications, and AI automation platforms. Experienced in MLOps, Docker, Kubernetes, MLflow, CI/CD pipelines, SQL, Tableau, and Power BI.
 

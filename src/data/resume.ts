@@ -16,7 +16,7 @@ export const profile = {
   location: 'California, USA',
   relocation: 'Open to relocation',
   email: 'tejaswar8484@gmail.com',
-  phone: '+1 (562) 569-3720',
+  phone: '+1 (562) 666-1626',
   linkedin: 'https://www.linkedin.com/in/tejaswar-reddy',
   github: '',
 };
